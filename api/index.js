@@ -22,16 +22,15 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('*', (req, res) => {
-    res.send("This is the backend")
-})
-
-
 app.listen(3000, () => {
     console.log("Server is running");
 })
 
 app.use('/api/auth', authRoute);
+
+app.get('*', (req, res) => {
+    res.send("This is the backend")
+})
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
