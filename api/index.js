@@ -3,25 +3,35 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
+//routes
+import authRoute from './routes/auth.route.js'
+
 dotenv.config();
 
 mongoose
-.connect(process.env.MONGO)
-.then(() => {
-    console.log("Connected to database");
-})
-.catch((err) => {
-    console.log(`Error occured during connection: ${err}`);
-});
+    .connect(process.env.MONGO)
+    .then(() => {
+        console.log("Connected to database");
+    })
+    .catch((err) => {
+        console.log(`Error occured during connection: ${err}`);
+    });
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('*', (req, res)=>{
+app.get('*', (req, res) => {
     res.send("This is the backend")
 })
+
+
+app.listen(3000, () => {
+    console.log("Server is running");
+})
+
+app.use('/api/auth', authRoute);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
@@ -32,7 +42,3 @@ app.use((err, req, res, next) => {
         message
     });
 });
-
-app.listen(4000, ()=>{
-    console.log("Server is running");
-})
