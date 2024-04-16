@@ -23,8 +23,8 @@ const Sidenavbar = () => {
                 <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
                     <div className='border rounded-md mt-1'>
                         <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
-                            <Link>Login</Link>
-                        </button> <br />
+                            <Link to='/sign-in'>Login</Link>
+                        </button><br />
                     </div>
                     <div className='border rounded-md'>
                         <button className='rounded-md p-2 w-52  shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>

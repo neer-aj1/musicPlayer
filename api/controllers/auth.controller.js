@@ -24,6 +24,7 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
+    const  username = email;
     try {
         const user = await User.findOne({ $or: [{ username }, { email }] });
         if (!user) {
@@ -36,7 +37,7 @@ export const signin = async (req, res, next) => {
             }
             else {
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-                const { password, ...rest } = user._doc;
+                const { password, updatedAt, __v, createdAt, ...rest } = user._doc;
                 res.cookie('access_token', token, { httpOnly: true, maxAge: 10 * 24 * 60 * 60 * 1000 }).status(200).json(rest);
             }
         }
@@ -48,7 +49,7 @@ export const signin = async (req, res, next) => {
 export const signOut = async (req, res, next) => {
     try {
         res.clearCookie('access_token');
-        res.status(200).json({'message':'User has been logged out!'});
+        res.status(200).json({ 'message': 'User has been logged out!' });
     } catch (error) {
         next(error);
     }
