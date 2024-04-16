@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './components/Error.jsx';
-import Temp from './components/Temp.jsx';
+import Signup from './routes/Signup.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
         element: <Error />
       },
       {
-        path: "c",
-        element: <Temp />
+        path: "sign-up",
+        element: <Signup />
       }
     ]
   }
