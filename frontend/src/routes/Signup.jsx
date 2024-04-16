@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 const Signup = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
