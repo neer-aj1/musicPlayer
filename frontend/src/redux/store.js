@@ -1,10 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit'
-import darkSlice from './slices/darkSlice';
-
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import userSlice from './slices/userSlice';
 
 const store = configureStore({
     reducer: {
-        darkModeToggler: darkSlice
+        user: userSlice,
     }
 });
 

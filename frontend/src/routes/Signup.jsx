@@ -11,16 +11,24 @@ const Signup = () => {
 
     const handleSignupFormSubmit = async (e) => {
         e.preventDefault();
-        const data = {username, email, password};
-        const res = await fetch('/api/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        const response = await res.json();
-        console.log(response);
+        try {
+            const data = { username, email, password };
+            const res = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            const response = await res.json();
+            if(response.success == false){
+                alert("WENT WRONG!!");
+                return;
+            }
+            navigate('/sign-in');
+        } catch (error) {
+            console.log("Error");
+        }
     }
     return (
         <div className='bg-black fixed inset-0 h-screen w-screen bg-opacity-80 backdrop-blur-sm text-white flex justify-center items-center'>

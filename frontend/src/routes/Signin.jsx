@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from 'react-router-dom';
-
+import {useSelector, useDispatch} from 'react-redux';
+import { signInUser } from '../redux/slices/userSlice';
 
 const Signin = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleSigninFormSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -19,11 +21,11 @@ const Signin = () => {
                 body: JSON.stringify(data)
             });
             const response = await res.json();
-            console.log(response);
             if(response.success == false){
                 alert("WENT WRONG!!");
                 return;
             }
+            dispatch(signInUser(response))
             navigate('/')
 
         } catch (error) {
