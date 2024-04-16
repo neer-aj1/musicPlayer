@@ -6,12 +6,23 @@ import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './components/Error.jsx';
+import Temp from './components/Temp.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Error />
+      },
+      {
+        path: "c",
+        element: <Temp />
+      }
+    ]
   }
 ])
 
