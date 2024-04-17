@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { signOutUser } from './redux/slices/userSlice';
 import { useDispatch } from 'react-redux';
+import AudioPlayer from './components/AudioPlayer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <div className='flex-1 bg-gray-900 h-screen overflow-y-auto overflow-x-hidden'>
         <Navbar />
         <Outlet />
+        <AudioPlayer/>
       </div>
     </div>
   )
