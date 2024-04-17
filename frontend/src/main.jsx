@@ -10,6 +10,8 @@ import Signup from './routes/Signup.jsx';
 import Signin from './routes/Signin.jsx';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Home } from './routes/Home.jsx';
+import AlbumSongs from './routes/AlbumSongs.jsx';
+import SongStrip from './components/SongStrip.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "sign-up",
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "sign-in",
         element: <Signin />
+      },
+      {
+        path: "album/:albumid",
+        element: <AlbumSongs />
       }
     ]
   }
