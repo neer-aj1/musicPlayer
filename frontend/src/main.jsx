@@ -9,6 +9,7 @@ import Error from './components/Error.jsx';
 import Signup from './routes/Signup.jsx';
 import Signin from './routes/Signin.jsx';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Home } from './routes/Home.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Error />
+        element: <Home />
       },
       {
         path: "sign-up",
