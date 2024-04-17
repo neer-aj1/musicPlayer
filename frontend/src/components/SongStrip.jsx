@@ -1,6 +1,14 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentSong } from '../redux/slices/songsSlice';
 
 const SongStrip = ({ number, id, name, image }) => {
+    const dispatch = useDispatch();
+    const allSongs = useSelector(state => state.song.songs.allSongs);
+    const playMusic = () => {
+        const index = allSongs.findIndex(song => song === id);
+        dispatch(setCurrentSong(index));
+    }
     return (
         <div className='w-full h-16 text-white gap-7 bg-white bg-opacity-15 backdrop-blur-3xl flex justify-start items-center p-2'>
             <div className='h-16 rounded-xl overflow-hidden flex justify-center items-center'>
@@ -8,7 +16,7 @@ const SongStrip = ({ number, id, name, image }) => {
             </div>
             <div className='w-full flex justify-between items-center px-10'>
                 <p>{name}</p>
-                <button>Play</button>
+                <button onClick={playMusic}>Play</button>
             </div>
         </div>
     )

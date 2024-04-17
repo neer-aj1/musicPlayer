@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom';
 import { fetchData, options } from '../utils/fetchData';
 import SongStrip from '../components/SongStrip';
 import Loader from '../components/Loader';
+import { addSongs } from '../redux/slices/songsSlice'
+import { useDispatch } from 'react-redux'
 
 const AlbumSongs = () => {
     let { albumid } = useParams();
+    const dispatch = useDispatch();
     const [albumData, setAlbumData] = useState(null);
     const [loading, setLoading] = useState(false);
     const url = `https://spotify81.p.rapidapi.com/albums?ids=${albumid}`;
@@ -15,8 +18,7 @@ const AlbumSongs = () => {
         const getAlbumDetails = async () => {
             try {
                 const response = await fetchData(url, options);
-                console.log("HELLO", response);
-                setAlbumData(response.albums[0]); 
+                setAlbumData(response.albums[0]);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching album details:', error);
@@ -24,7 +26,22 @@ const AlbumSongs = () => {
             }
         }
         getAlbumDetails();
-    }, [albumid])
+    }, [albumid]);
+
+    useEffect(() => {
+        const setSongs = async () => {
+            try {
+                let songs = [];
+                await albumData?.tracks?.items.map((track) => (
+                    songs = [...songs, track.id]
+                ))
+                dispatch(addSongs(songs));
+            } catch (error) {
+                console.log("Error Occured in setSongs", error);
+            }
+        }
+        setSongs();
+    }, [albumid, albumData])
 
     return (
         loading ? <Loader /> :
@@ -41,7 +58,7 @@ const AlbumSongs = () => {
                     </div>
                     <div className='p-4 rounded-xl border flex gap-4 flex-col overflow-y-auto'>
                         {albumData.tracks.items.map((track, index) => (
-                            <SongStrip key={index} number={track.track_number} id={track.id} name={track.name} />
+                            <SongStrip key={track.id} number={track.track_number} id={track.id} name={track.name} />
                         ))}
                     </div>
                 </div>
