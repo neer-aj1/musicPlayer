@@ -1,15 +1,27 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { signOutUser } from '../redux/slices/userSlice';
 import { IoHomeOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 
 const Sidenavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
     };
-
+    const handleUserLogout = async () => {
+        try {
+            const res = await fetch('api/auth/signout');
+            const data = await res.json();
+            console.log(data);
+            dispatch(signOutUser());
+        } catch (error) {
+            console.log("Something Wrong Happened!!");
+        }
+    }
     return (
         <div className='flex md:flex md:justify-between md:max-h-screen bg-gray-900'>
             <div className='hidden md:flex flex-2 min-w-96 flex-col gap-4 max-h-screen bg-gray-950 p-2 text-white border-4 border-gray-950'>
@@ -78,6 +90,10 @@ const Sidenavbar = () => {
                             </div>
                         </div>
                     </div>
+                    {user.currentUser ? <div className='text-white flex justify-center items-center'>
+                        <button onClick={handleUserLogout} className='p-2 border mt-4 rounded-xl hover:text-gray-800 hover:bg-white duration-300'>Logout</button>
+                    </div> : ""}
+
                 </div>
             )}
         </div>
