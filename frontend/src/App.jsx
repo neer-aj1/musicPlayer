@@ -17,7 +17,7 @@ function App() {
   return (
     <div className='flex h-screen'>
       <Sidenavbar />
-      <div className='flex-1 bg-gray-900 h-screen overflow-y-auto'>
+      <div className='flex-1 bg-gray-900 h-screen overflow-y-auto overflow-x-hidden'>
         <Navbar />
         <Outlet />
       </div>
