@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentSong } from '../redux/slices/songsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SongStrip = ({ number, id, name, image }) => {
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const allSongs = useSelector(state => state.song?.allSongs);
     const playMusic = () => {
-        const index = allSongs?.findIndex(song => song === id);
-        dispatch(setCurrentSong(index));
+        if(user.currentUser){
+            const index = allSongs?.findIndex(song => song === id);
+            dispatch(setCurrentSong(index));
+        }
+        else{
+            navigate('/sign-in');
+        }
     }
     return (
         <div className='w-full h-16 text-white gap-7 bg-white bg-opacity-15 backdrop-blur-3xl flex justify-start items-center p-2'>

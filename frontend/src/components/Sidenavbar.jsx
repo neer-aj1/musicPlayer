@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOutUser } from '../redux/slices/userSlice';
 import { IoHomeOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
+import { addSongs } from '../redux/slices/songsSlice';
+
 
 const Sidenavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +20,10 @@ const Sidenavbar = () => {
             const data = await res.json();
             console.log(data);
             dispatch(signOutUser());
+            dispatch(addSongs([]))
+
         } catch (error) {
-            console.log("Something Wrong Happened!!");
+            console.log("Something Wrong Happened!!", error);
         }
     }
     return (
@@ -38,19 +42,22 @@ const Sidenavbar = () => {
                     </nav>
                 </div>
                 <div className='flex flex-col bg-gray-800 flex-grow overflow-y-auto rounded-xl pl-4'>
-                    <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
-                    <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
-                        <div className='border rounded-md mt-1'>
-                            <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
-                                <Link to='/sign-in'>Login</Link>
-                            </button><br />
-                        </div>
-                        <div className='border rounded-md'>
-                            <button className='rounded-md p-2 w-52  shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
-                                <Link to='/sign-up'>Signup</Link>
-                            </button>
-                        </div>
-                    </div>
+                    {user.currentUser ? "Enjoy Your songs" :
+                        <div>
+                            <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
+                            <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
+                                <div className='border rounded-md mt-1'>
+                                    <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
+                                        <Link to='/sign-in'>Login</Link>
+                                    </button><br />
+                                </div>
+                                <div className='border rounded-md'>
+                                    <button className='rounded-md p-2 w-52  shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
+                                        <Link to='/sign-up'>Signup</Link>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>}
                 </div>
             </div>
             <div className="md:hidden z-10 flex items-center fixed top-5 right-2">
@@ -74,21 +81,23 @@ const Sidenavbar = () => {
                             </div>
                         </nav>
                     </div>
-
                     <div className='flex flex-col bg-gray-800 flex-grow overflow-y-auto rounded-xl pl-4'>
-                        <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
-                        <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
-                            <div className='border rounded-md mt-1'>
-                                <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
-                                    <Link to='/sign-in'>Login</Link>
-                                </button><br />
-                            </div>
-                            <div className='border rounded-md'>
-                                <button className='rounded-md p-2 w-52  shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
-                                    <Link to='/sign-up'>Signup</Link>
-                                </button>
-                            </div>
-                        </div>
+                        {user.currentUser ? "ENJOY YOUR SONGS" :
+                            <div>
+                                <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
+                                <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
+                                    <div className='border rounded-md mt-1'>
+                                        <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
+                                            <Link to='/sign-in'>Login</Link>
+                                        </button><br />
+                                    </div>
+                                    <div className='border rounded-md'>
+                                        <button className='rounded-md p-2 w-52  shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
+                                            <Link to='/sign-up'>Signup</Link>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>}
                     </div>
                     {user.currentUser ? <div className='text-white flex justify-center items-center'>
                         <button onClick={handleUserLogout} className='p-2 border mt-4 rounded-xl hover:text-gray-800 hover:bg-white duration-300'>Logout</button>

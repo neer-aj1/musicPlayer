@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../components/Card';
 
-const SearchResults = ({ onSearch, searchResults, searchText, setSearchText }) => {
+const SearchResults = ({ onSearch, searchResults, searchText, setSearchText, loading }) => {
 
     const handleSongSearch = async () => {
         onSearch(searchText);
@@ -13,7 +13,7 @@ const SearchResults = ({ onSearch, searchResults, searchText, setSearchText }) =
                 <input className='h-fit bg-white bg-opacity-15 text-white  p-2 focus:outline-none backdrop-blur-sm' type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
                 <button onClick={handleSongSearch} className='text-white p-2 bg-gray-950 hover:bg-white hover:text-black duration-500'>Search</button>
             </div>
-            {searchResults &&
+            {searchResults ? 
                 <div>
                     <div className='p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20'>
                         {searchResults.items.map((album, index) => (
@@ -21,6 +21,8 @@ const SearchResults = ({ onSearch, searchResults, searchText, setSearchText }) =
                         ))}
                     </div>
                 </div>
+                :
+                <p className='text-white'>Loading....</p>
             }
         </div>
     );

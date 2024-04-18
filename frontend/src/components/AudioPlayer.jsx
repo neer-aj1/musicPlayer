@@ -6,14 +6,18 @@ import { useRef, useState } from 'react';
 import { fetchData, options } from '../utils/fetchData';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentSong } from '../redux/slices/songsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const AudioPlayer = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(state => state.user);
     const currTrackInd = useSelector(state => state.song?.currentSong);
     const [trackInd, setTrackInd] = useState(useSelector(state => state.song?.currentSong));
     // console.log("Trackind", trackInd);
     const [currentTrack, setCurrentTrack] = useState();
     const len = useSelector(state => state.song?.allSongs?.length);
+    console.log(len);
     let songId = useSelector(state => state.song?.allSongs[trackInd]);
 
     useEffect(() => {
@@ -21,15 +25,36 @@ const AudioPlayer = () => {
     }, [currTrackInd]);
 
     const nextSong = async () => {
-        await audioRef.current.pause();
-        if (currentTrack + 1 >= len) {
-            setTrackInd(0);
+        if (user.currentUser) {
+            await audioRef.current.pause();
+            if (trackInd + 1 >= len) {
+                setTrackInd(0);
+            }
+            else {
+                setTrackInd(prev => prev + 1);
+            }
+            dispatch(setCurrentSong(trackInd));
+            songId = useSelector(state => state.song.allSongs[trackInd])
         }
-        else {
-            setTrackInd(prev => prev + 1);
+        else{
+            navigate("/sign-in");
         }
-        dispatch(setCurrentSong(trackInd));
-        songId = useSelector(state => state.song.allSongs[trackInd])
+    }
+    const prevSong = async () => {
+        if (user.currentUser) {
+            await audioRef.current.pause();
+            if ((trackInd - 1) >= 0) {
+                setTrackInd(prev => prev-1);
+            }
+            else {
+                setTrackInd(len-1);
+            }
+            dispatch(setCurrentSong(trackInd));
+            songId = useSelector(state => state.song.allSongs[trackInd])
+        }
+        else{
+            navigate("/sign-in");
+        }
     }
 
     useEffect(() => {
@@ -57,13 +82,14 @@ const AudioPlayer = () => {
                 const data = await fetchData(url, options);
                 console.log("REAL SONG URL", data);
                 setCurrentTrack(data.tracks[0].preview_url)
+                console.log("TRRRRRRRRRRRRRRRAAAAAAAAAAAAAAAAKKKKKKKKKK",data.tracks[0].preview_url);
             } catch (error) {
                 console.log("Error in fetching song", error);
             }
         }
         getSong();
         console.log("AUDIOPLAYER USEEFFECT");
-    }, [trackInd])
+    }, [trackInd, songId])
 
     const [timeProgress, setTimeProgress] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -77,7 +103,7 @@ const AudioPlayer = () => {
                     <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef }} />
                 </div>
                 <div className='flex-1'>
-                    <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, nextSong }} />
+                    <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, nextSong, prevSong }} />
                     <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
                 </div>
             </div>

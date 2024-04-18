@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Card = ({ coverArt, name, year, uri }) => {
     uri= uri.split(":")[2];
-    console.log();(uri)
+    
     return (
         <div className="w-[200px] h-fit border rounded-lg shadow bg-gray-800 border-gray-700">
             <Link>

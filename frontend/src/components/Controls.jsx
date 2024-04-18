@@ -8,7 +8,7 @@ import {
     IoPauseSharp,
 } from 'react-icons/io5';
 
-const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSong }) => {
+const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSong, prevSong }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(60)
     const playAnimationRef = useRef();
@@ -58,7 +58,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSon
     return (
         <div className="controls-wrapper">
             <div className="controls flex">
-                <button>
+                <button onClick={prevSong}>
                     <IoPlaySkipBackSharp />
                 </button>
                 <button>

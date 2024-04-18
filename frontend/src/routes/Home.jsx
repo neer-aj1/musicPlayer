@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import { fetchData, options } from '../utils/fetchData';
 import Loader from '../components/Loader';
@@ -6,13 +6,16 @@ import Loader from '../components/Loader';
 export const Home = () => {
     const [albums, setAlbums] = useState(null);
     const [loading, setLoading] = useState(false);
-    const getAlbums = async () => {
-        setLoading(true);
-        const url = 'https://spotify81.p.rapidapi.com/search?q=arijit&type=multi&offset=0&limit=20&numberOfTopResults=5';
-        const data = await fetchData(url, options);
-        setAlbums(data.albums);
-        setLoading(false);
-    }
+    useEffect(()=>{
+        const getAlbums = async () => {
+            setLoading(true);
+            const url = 'https://spotify81.p.rapidapi.com/search?q=arijit&type=multi&offset=0&limit=20&numberOfTopResults=5';
+            const data = await fetchData(url, options);
+            setAlbums(data.albums);
+            setLoading(false);
+        }
+        getAlbums();
+    },[])
     return (
         <div>
             {loading ? (<Loader />) :
@@ -26,7 +29,6 @@ export const Home = () => {
                         </div>
                     </div>)
             }
-            <button className='text-white' onClick={getAlbums}>GETSONGS</button>
         </div>
     )
 }

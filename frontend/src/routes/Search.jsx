@@ -8,9 +8,10 @@ import { updateSearchedSong } from '../redux/slices/searchedSong.js';
 
 const Search = () => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     const [albums, setAlbums] = useState(null);
     const [searchText, setSearchText] = useState(useSelector(state => state.searchedSong?.currentSong));
-    
+
 
     useEffect(() => {
         handleSongSearch();
@@ -18,18 +19,21 @@ const Search = () => {
 
     const handleSongSearch = async () => {
         try {
+            setLoading(true)
             const url = `https://spotify81.p.rapidapi.com/search?q=${searchText}&type=albums&offset=0&limit=10&numberOfTopResults=5';`
             const res = await fetchData(url, options);
             setAlbums(res.albums);
             dispatch(updateSearchedSong(searchText))
+            setLoading(false);
         } catch (error) {
             console.log("Error while fetching search results", error);
+            setLoading(false);
         }
     }
     console.log(searchText);
     return (
         <div className='pt-10 pl-10'>
-            <SearchResults onSearch={handleSongSearch} searchResults={albums} searchText={searchText} setSearchText={setSearchText} />
+            <SearchResults onSearch={handleSongSearch} searchResults={albums} searchText={searchText} setSearchText={setSearchText} loading={loading} />
         </div>
     )
 }
