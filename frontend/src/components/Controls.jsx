@@ -34,6 +34,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSon
         } else {
             audioRef.current.pause();
         }
+        console.log("Controls USEEFFECT");
     }, [isPlaying, audioRef]);
 
     useEffect(() => {
@@ -44,12 +45,14 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSon
             audioRef.current.pause();
             cancelAnimationFrame(playAnimationRef.current);
         }
+        console.log("Controls USEEFFECT");
     }, [isPlaying, audioRef, repeat]);
 
     useEffect(() => {
         if (audioRef) {
             audioRef.current.volume = volume / 100;
         }
+        console.log("Controls USEEFFECT");
     }, [volume, audioRef]);
 
     return (

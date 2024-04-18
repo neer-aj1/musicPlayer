@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 
 const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) => {
@@ -7,7 +7,14 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) =
         setDuration(seconds);
         progressBarRef.current.max = seconds;
     };
-
+    useEffect(()=>{
+        audioRef.current.play();
+        console.log("Displaytrack USEEFFECT");
+        
+    }, [currentTrack])
+    useEffect(()=>{
+        console.log("Current Track", currentTrack);
+    }, [])
     return (
         <div>
             <audio

@@ -1,7 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
-    currentSong: null,
+    currentSong: 0,
     allSongs: []
 }
 
@@ -10,10 +10,10 @@ const songsSlice = createSlice({
     initialState,
     reducers: {
         addSongs: (state, action) => {
-            state.songs.allSongs = [...action.payload];
+            state.allSongs = [...action.payload];
         },
         setCurrentSong: (state, action) => {
-            state.songs.currentSong = action.payload;
+            state.currentSong = action.payload;
         },
     }
 });

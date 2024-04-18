@@ -4,9 +4,9 @@ import { setCurrentSong } from '../redux/slices/songsSlice';
 
 const SongStrip = ({ number, id, name, image }) => {
     const dispatch = useDispatch();
-    const allSongs = useSelector(state => state.song.songs.allSongs);
+    const allSongs = useSelector(state => state.song?.allSongs);
     const playMusic = () => {
-        const index = allSongs.findIndex(song => song === id);
+        const index = allSongs?.findIndex(song => song === id);
         dispatch(setCurrentSong(index));
     }
     return (

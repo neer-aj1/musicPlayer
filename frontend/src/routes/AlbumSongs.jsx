@@ -19,6 +19,7 @@ const AlbumSongs = () => {
             try {
                 const response = await fetchData(url, options);
                 setAlbumData(response.albums[0]);
+                console.log("hekkki", response.albums[0]);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching album details:', error);
@@ -32,9 +33,11 @@ const AlbumSongs = () => {
         const setSongs = async () => {
             try {
                 let songs = [];
+                console.log("ALBUM DATA:", albumData);
                 await albumData?.tracks?.items.map((track) => (
                     songs = [...songs, track.id]
                 ))
+                console.log("SONGS", songs);
                 dispatch(addSongs(songs));
             } catch (error) {
                 console.log("Error Occured in setSongs", error);
