@@ -11,7 +11,7 @@ const AudioPlayer = () => {
     const dispatch = useDispatch();
     const currTrackInd = useSelector(state => state.song?.currentSong);
     const [trackInd, setTrackInd] = useState(useSelector(state => state.song?.currentSong));
-    console.log("Trackind", trackInd);
+    // console.log("Trackind", trackInd);
     const [currentTrack, setCurrentTrack] = useState();
     const len = useSelector(state => state.song?.allSongs?.length);
     let songId = useSelector(state => state.song?.allSongs[trackInd]);
@@ -52,7 +52,7 @@ const AudioPlayer = () => {
         const getSong = async () => {
             try {
                 const url = `https://spotify81.p.rapidapi.com/tracks?ids=${songId}`
-                console.log("SONGID",songId);
+                console.log("SONGID", songId);
                 console.log("SONG URL", url);
                 const data = await fetchData(url, options);
                 console.log("REAL SONG URL", data);
@@ -71,11 +71,15 @@ const AudioPlayer = () => {
     const progressBarRef = useRef();
 
     return (
-        <div className="audio-player bg-gray-300 p-4 rounded-lg">
-            <div className="inner max-w-screen-lg mx-auto p-8">
-                <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef }} />
-                <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, nextSong }} />
-                <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
+        <div className="audio-player bg-gray-300 rounded-lg">
+            <div className="inner w-full flex justify-evenly px-10 py-2">
+                <div className='flex-2'>
+                    <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef }} />
+                </div>
+                <div className='flex-1'>
+                    <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, nextSong }} />
+                    <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
+                </div>
             </div>
         </div>
     );

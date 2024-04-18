@@ -3,10 +3,13 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userSlice from './slices/userSlice';
 import songsSlice from './slices/songsSlice';
+import searchedSongSlice from './slices/searchedSong';
+
 
 const rootReducer = combineReducers({
     user: userSlice,
-    song: songsSlice
+    song: songsSlice,
+    searchedSong: searchedSongSlice
 })
 
 const persistConfig = {

@@ -12,7 +12,7 @@ function App() {
   const client_access_token = Cookies.get('client_access_token')
   const dispatch = useDispatch();
   useEffect(() => {
-    if(!client_access_token)
+    if (!client_access_token)
       dispatch(signOutUser());
   }, [])
   return (
@@ -20,8 +20,12 @@ function App() {
       <Sidenavbar />
       <div className='flex-1 bg-gray-950 h-screen overflow-y-auto overflow-x-hidden'>
         <Navbar />
-        <Outlet />
-        <AudioPlayer/>
+        <div className='flex h-full flex-col justify-between'>
+          <div className='overflow-y-auto overflow-x-hidden'>
+            <Outlet />
+          </div>
+          <AudioPlayer />
+        </div>
       </div>
     </div>
   )

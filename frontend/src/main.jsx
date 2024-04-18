@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Home } from './routes/Home.jsx';
 import AlbumSongs from './routes/AlbumSongs.jsx';
 import SongStrip from './components/SongStrip.jsx';
+import Search from './routes/Search.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "album/:albumid",
         element: <AlbumSongs />
+      },
+      {
+        path: "/search",
+        element: <Search />
       }
     ]
   }

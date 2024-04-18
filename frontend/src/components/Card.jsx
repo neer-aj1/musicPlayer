@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Card = ({ coverArt, name, year, uri }) => {
     uri= uri.split(":")[2];
-
+    console.log();(uri)
     return (
         <div className="w-[200px] h-fit border rounded-lg shadow bg-gray-800 border-gray-700">
             <Link>
@@ -15,7 +15,7 @@ const Card = ({ coverArt, name, year, uri }) => {
                 </Link>
                 <p className="mb-3 font-normal dark:text-gray-700 text-gray-400">{year}</p>
                 <Link
-                    to={`album/${uri}`}
+                    to={`/album/${uri}`}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                     Explore

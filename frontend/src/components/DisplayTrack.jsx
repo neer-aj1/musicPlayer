@@ -23,7 +23,7 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) =
                 onLoadedMetadata={onLoadedMetadata}
             />
             <div className="audio-info flex gap-20">
-                <div className="audio-image w-72 h-72 bg-gray-900">
+                <div className=" bg-gray-900">
                     {currentTrack?.thumbnail? (
                         <img src={currentTrack?.thumbnail} alt="audio avatar" className="object-cover w-full h-full" />
                     ) : (
