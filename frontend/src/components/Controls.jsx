@@ -58,14 +58,8 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSon
                 <button>
                     <IoPlaySkipBackSharp />
                 </button>
-                <button>
-                    <IoPlayBackSharp />
-                </button>
                 <button onClick={togglePlayPause}>
-                    {isPlaying ? <IoPlaySharp /> : <IoPauseSharp />}
-                </button>
-                <button>
-                    <IoPlayForwardSharp />
+                    {isPlaying ?  <IoPlaySharp /> : <IoPauseSharp />}
                 </button>
                 <button onClick={nextSong}>
                     <IoPlaySkipForwardSharp />

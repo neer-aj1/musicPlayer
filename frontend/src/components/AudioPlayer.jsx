@@ -9,10 +9,10 @@ import { setCurrentSong } from '../redux/slices/songsSlice';
 
 const AudioPlayer = () => {
     const dispatch = useDispatch();
-    const [trackInd, setTrackInd] = useState(useSelector(state => state.song.songs.currentSong));
+    const [trackInd, setTrackInd] = useState();
     const [currentTrack, setCurrentTrack] = useState();
-    const len = useSelector(state => state.song.songs.allSongs.length);
-    const songId = useSelector(state => state.song.songs.allSongs[trackInd]);
+    const len = 0;
+    const songId = 1;
 
     const nextSong = async () => {
         if (currentTrack+1 >= len){
@@ -44,7 +44,7 @@ const AudioPlayer = () => {
     const progressBarRef = useRef();
 
     return (
-        <div className="audio-player bg-gray-300 p-4 rounded-lg">
+        <div className="audio-player bg-[#1ca9c9] p-4 rounded-lg mt-9 bg-opacity-25">
             <div className="inner max-w-screen-lg mx-auto p-8">
                 <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef }} />
                 <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, nextSong }} />
