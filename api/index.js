@@ -9,7 +9,7 @@ import authRoute from './routes/auth.route.js'
 dotenv.config();
 
 mongoose
-    .connect(process.env.MONGO)
+    .connect("mongodb://127.0.0.1:27017")
     .then(() => {
         console.log("Connected to database");
     })
@@ -22,7 +22,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     console.log("Server is running");
 })
 

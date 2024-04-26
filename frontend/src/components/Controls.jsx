@@ -1,12 +1,11 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react';
 import {
-    IoPlayBackSharp,
-    IoPlayForwardSharp,
     IoPlaySkipBackSharp,
     IoPlaySkipForwardSharp,
     IoPlaySharp,
     IoPauseSharp,
 } from 'react-icons/io5';
+import { CiVolumeHigh } from "react-icons/ci";
 
 const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSong, prevSong }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -56,25 +55,20 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, nextSon
     }, [volume, audioRef]);
 
     return (
-        <div className="controls-wrapper">
-            <div className="controls flex">
+        <div className="flex w-full justify-between items-center">
+            <div className="controls flex text-3xl">
                 <button onClick={prevSong}>
                     <IoPlaySkipBackSharp />
                 </button>
-                <button>
-                    <IoPlayBackSharp />
-                </button>
                 <button onClick={togglePlayPause}>
                     {isPlaying ? <IoPlaySharp /> : <IoPauseSharp />}
-                </button>
-                <button>
-                    <IoPlayForwardSharp />
                 </button>
                 <button onClick={nextSong}>
                     <IoPlaySkipForwardSharp />
                 </button>
             </div>
-            <div>
+            <div className='flex gap-4'>
+                <CiVolumeHigh className='text-3xl'/>
                 <input type="range" value={volume} onChange={(e) => (setVolume(e.target.value))} min={0} max={100} />
             </div>
         </div>

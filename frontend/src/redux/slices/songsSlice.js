@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     currentSong: 0,
-    allSongs: []
+    allSongs: [],
+    currentSongImg: null
 }
 
 const songsSlice = createSlice({
@@ -15,9 +16,12 @@ const songsSlice = createSlice({
         setCurrentSong: (state, action) => {
             state.currentSong = action.payload;
         },
+        setCurrSongImg: (state, action) => {
+            state.currentSongImg = action.payload
+        }
     }
 });
 
-export const { addSongs, setCurrentSong } = songsSlice.actions;
+export const { addSongs, setCurrentSong, setCurrSongImg } = songsSlice.actions;
 
 export default songsSlice.reducer;

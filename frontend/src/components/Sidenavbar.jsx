@@ -42,10 +42,11 @@ const Sidenavbar = () => {
                     </nav>
                 </div>
                 <div className='flex flex-col bg-gray-800 flex-grow overflow-y-auto rounded-xl pl-4'>
-                    {user.currentUser ? "Enjoy Your songs" :
+                    {user.currentUser ? <div className='h-full w-full flex items-center justify-center'>
+                        <p className='text-center text-2xl font-bold'>ENJOY YOUR SONGS</p>
+                    </div> :
                         <div>
-                            <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
-                            <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
+                            <div className='flex flex-col mt-16 gap-6 justify-center items-center overflow-y-auto'>
                                 <div className='border rounded-md mt-1'>
                                     <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
                                         <Link to='/sign-in'>Login</Link>
@@ -82,10 +83,11 @@ const Sidenavbar = () => {
                         </nav>
                     </div>
                     <div className='flex flex-col bg-gray-800 flex-grow overflow-y-auto rounded-xl pl-4'>
-                        {user.currentUser ? "ENJOY YOUR SONGS" :
+                        {user.currentUser ? <div className='h-full w-full flex items-center justify-center'>
+                            <p className='text-center text-2xl font-bold'>ENJOY YOUR SONGS</p>
+                        </div> :
                             <div>
-                                <h2 className='sticky top-0 bg-gray-800 py-8 text-xl font-bold'>Your Favourite Songs</h2>
-                                <div className='flex flex-col gap-6 justify-center items-center overflow-y-auto'>
+                                <div className='flex flex-col gap-6 mt-16 justify-center items-center overflow-y-auto'>
                                     <div className='border rounded-md mt-1'>
                                         <button className='p-2 w-52 rounded-md shadow-md hover:bg-white hover:text-black duration-500 hover:-translate-x-1 hover:-translate-y-1'>
                                             <Link to='/sign-in'>Login</Link>

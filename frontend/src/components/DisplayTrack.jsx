@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) => {
+    const image = useSelector(state => state.song.currentSongImg);
+    const [currImage, setCurrImage] = useState(image);
     const onLoadedMetadata = () => {
         const seconds = audioRef.current.duration;
         setDuration(seconds);
@@ -9,9 +12,11 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) =
     };
     useEffect(()=>{
         audioRef.current.play();
-        console.log("Displaytrack USEEFFECT");
         
-    }, [currentTrack])
+    }, [currentTrack, image]);
+    useEffect(()=>{
+        setCurrImage(image)
+    },[image])
     useEffect(()=>{
         console.log("Current Track", currentTrack);
     }, [])
@@ -24,8 +29,8 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef }) =
             />
             <div className="audio-info flex gap-20">
                 <div className=" bg-gray-900">
-                    {currentTrack?.thumbnail? (
-                        <img src={currentTrack?.thumbnail} alt="audio avatar" className="object-cover w-full h-full" />
+                    {image ? (
+                        <img src={currImage} alt="audio avatar" className="object-cover w-24" />
                     ) : (
                         <div className="icon-wrapper flex justify-center items-center w-20 h-20 bg-gray-600 rounded-full">
                             <span className="audio-icon text-gray-400 text-2xl">
