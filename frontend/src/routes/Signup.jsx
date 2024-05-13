@@ -12,7 +12,7 @@ const Signup = () => {
     const handleSignupFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = { username, email, password };
+            const data = { image, email, password };
             const res = await fetch('/api/auth/signup', {
                 method: 'POST',
                 headers: {
