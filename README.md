@@ -31,9 +31,10 @@ FRONTEND
    ```sh
    npm run dev
    ```
-
+<br>
 BACKEND
   <br><br> Navigate to and start the backend server
+  
    ```sh
    npm start
    ```
